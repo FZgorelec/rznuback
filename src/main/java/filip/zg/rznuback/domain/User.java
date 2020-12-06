@@ -34,7 +34,7 @@ public class User {
     private String name;
     @Column
     private Role role;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Recipe> recipeModifications;
 
     public String getUsername() {
