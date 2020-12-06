@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,8 +22,10 @@ public class RecipeService {
         return recipeRepository.save(recipe);
     }
 
-    public void getRecipe(Long recipeId) {
-        recipeRepository.findById(recipeId);
+    public Recipe getRecipe(Long recipeId) throws Exception {
+        Optional<Recipe> recipe = recipeRepository.findById(recipeId);
+        if (recipe.isPresent())return recipe.get();
+       else throw new Exception("No recipe with this id found");
     }
 
     public void deleteRecipe(Long recipeId) {

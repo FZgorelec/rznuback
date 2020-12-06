@@ -28,23 +28,28 @@ public class UserController {
         return userService.getUsers();
     }
 
+    @DeleteMapping("/{id}")
+    public void getUsers(@PathVariable Long id) {
+        userService.deleteUser(id);
+    }
+
     @GetMapping("/{id}")
     public User getUser(@PathVariable("id") Long userId) {
         return userService.getUser(userId);
     }
 
-    @GetMapping("/{id}/recipe/{recipeId}")
-    public void getRecipe(@PathVariable("recipeId") Long recipeId) {
-        recipeService.getRecipe(recipeId);
+    @GetMapping("/{id}/recipes/{recipeId}")
+    public Recipe getRecipe(@PathVariable("recipeId") Long recipeId) throws Exception {
+       return recipeService.getRecipe(recipeId);
     }
 
-    @PostMapping("/{id}/recipe")
+    @PostMapping("/{userId}/recipes")
     public User saveRecipe(@PathVariable("userId") Long userId, @RequestBody Recipe recipe) throws Exception {
         return userService.saveUserRecipe(userId, recipe);
     }
 
-    @DeleteMapping("/{id}/recipe/{recipeId}")
-    public void deleteRecipe(@PathVariable("recipeId") Long recipeId) {
-        recipeService.deleteRecipe(recipeId);
+    @DeleteMapping("/{id}/recipes/{recipeId}")
+    public void deleteRecipe(@PathVariable("recipeId") Long recipeId, @PathVariable("id") Long id) {
+        userService.deleteRecipe(id, recipeId);
     }
 }

@@ -1,6 +1,7 @@
 package filip.zg.rznuback.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import filip.zg.rznuback.domain.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,12 +28,13 @@ public class User {
     @Column
     private String username;
     @Column
+    @JsonIgnore
     private String password;
     @Column
     private String name;
     @Column
     private Role role;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Recipe> recipeModifications;
 
     public String getUsername() {
@@ -43,11 +45,12 @@ public class User {
         this.username = username;
     }
 
+
     public String getPassword() {
         return password;
     }
 
-    @JsonIgnore
+    @JsonProperty
     public void setPassword(String password) {
         this.password = password;
     }

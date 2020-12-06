@@ -25,8 +25,13 @@ public class RecipeController {
         return recipeService.saveRecipe(recipe);
     }
 
+    @GetMapping("/{id}")
+    public Recipe getRecipe(@PathVariable Long id) throws Exception {
+        return recipeService.getRecipe(id);
+    }
+
     @DeleteMapping("/{recipeId}")
-    public void putRecipe(@PathVariable("recipeId") Long recipeId){
+    public void deleteRecipe(@PathVariable("recipeId") Long recipeId){
         recipeService.deleteRecipe(recipeId);
     }
 
