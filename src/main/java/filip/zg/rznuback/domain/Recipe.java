@@ -1,5 +1,7 @@
 package filip.zg.rznuback.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +14,9 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
+@Builder
 public class Recipe {
 
     @Id

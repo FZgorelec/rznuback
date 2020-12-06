@@ -7,6 +7,9 @@ import filip.zg.rznuback.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/users")
@@ -16,29 +19,32 @@ public class UserController {
     private final RecipeService recipeService;
 
     @PutMapping
-    public void saveUser(User user){
+    public void saveUser(@RequestBody User user) throws Exception {
         userService.saveUser(user);
     }
 
+    @GetMapping
+    public List<User> getUsers() {
+        return userService.getUsers();
+    }
+
     @GetMapping("/{id}")
-    public void getUser(@PathVariable("id") Long userId){
-        userService.getUser(userId);
+    public User getUser(@PathVariable("id") Long userId) {
+        return userService.getUser(userId);
     }
 
     @GetMapping("/{id}/recipe/{recipeId}")
-    public void getRecipe(@PathVariable("recipeId") Long recipeId){
+    public void getRecipe(@PathVariable("recipeId") Long recipeId) {
         recipeService.getRecipe(recipeId);
     }
 
     @PostMapping("/{id}/recipe")
-    public User getRecipe(@PathVariable("userId") Long userId, @RequestBody Recipe recipe){
-        User user = userService.getUser(userId);
-        user.getRecipeModifications().add(recipe);
-       return userService.saveUser(user);
+    public User saveRecipe(@PathVariable("userId") Long userId, @RequestBody Recipe recipe) throws Exception {
+        return userService.saveUserRecipe(userId, recipe);
     }
 
     @DeleteMapping("/{id}/recipe/{recipeId}")
-    public void deleteRecipe(@PathVariable("recipeId") Long recipeId){
+    public void deleteRecipe(@PathVariable("recipeId") Long recipeId) {
         recipeService.deleteRecipe(recipeId);
     }
 }

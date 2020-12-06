@@ -18,7 +18,7 @@ public class JwtUtils {
 
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
 
-        int jwtExpirationMs = 100 * 60 * 60 * 2;
+        int jwtExpirationMs = 1000 * 60 * 60 * 2;
         return Jwts.builder()
                 .setSubject((userPrincipal.getUsername()))
                 .setIssuedAt(new Date())

@@ -21,7 +21,7 @@ public class RecipeController {
     }
 
     @PutMapping
-    public Recipe putRecipe(Recipe recipe){
+    public Recipe putRecipe(@RequestBody Recipe recipe){
         return recipeService.saveRecipe(recipe);
     }
 
