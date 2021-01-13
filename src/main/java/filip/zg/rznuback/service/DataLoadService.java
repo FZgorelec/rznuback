@@ -30,8 +30,8 @@ public class DataLoadService implements ApplicationRunner {
         Recipe recipe2 = Recipe.builder().description("Recipe description").ingredients("Fish, cheese, pepper, bread...").name("Fish sandwich").modification(false).build();
         Recipe recipeModification = Recipe.builder().description("Recipe modified description").ingredients("Meat, cheese, pepper, onions, bread...").modification(true).name("Meat onion sandwich").build();
 
-        User user = User.builder().name("Admin").password("$2a$10$mR4MU5esBbUd6JWuwWKTA.tRy.jo4d4XRkgnamcOJfw5pJ8Ao/RDS").role(Role.ADMIN).username("admin").build();
-        User user2 = User.builder().name("User").password("$2a$10$mR4MU5esBbUd6JWuwWKTA.tRy.jo4d4XRkgnamcOJfw5pJ8Ao/RDS").role(Role.USER).username("user").build();
+        User user = User.builder().name("Admin").chatType("Polling").password("$2a$10$mR4MU5esBbUd6JWuwWKTA.tRy.jo4d4XRkgnamcOJfw5pJ8Ao/RDS").role(Role.ADMIN).username("admin").build();
+        User user2 = User.builder().name("User").chatType("Polling").password("$2a$10$mR4MU5esBbUd6JWuwWKTA.tRy.jo4d4XRkgnamcOJfw5pJ8Ao/RDS").role(Role.USER).username("user").build();
         userRepository.save(user);
         userRepository.save(user2);
         List<Recipe> recipes = new ArrayList<>();

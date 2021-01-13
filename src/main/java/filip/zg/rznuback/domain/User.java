@@ -34,6 +34,8 @@ public class User {
     private String name;
     @Column
     private Role role;
+    @Column
+    private String chatType;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Recipe> recipeModifications;
 

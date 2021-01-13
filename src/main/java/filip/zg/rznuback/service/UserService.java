@@ -18,6 +18,8 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final RecipeRepository recipeRepository;
+    private final SecurityService securityService;
+
 
     private final PasswordEncoder encoder;
 
@@ -42,6 +44,11 @@ public class UserService {
 
     public List<User> getUsers() {
         return userRepository.findAll();
+    }
+
+    public String getChatType() {
+        User user = userRepository.getOne(securityService.getLoggedUserId());
+        return user.getChatType();
     }
 
     @Transactional
@@ -70,5 +77,11 @@ public class UserService {
         userRepository.save(user);
         recipeRepository.deleteById(recipeId);
 
+    }
+
+    public void setChatType(String chatType) {
+        User user = userRepository.getOne(securityService.getLoggedUserId());
+        user.setChatType(chatType);
+        userRepository.save(user);
     }
 }
