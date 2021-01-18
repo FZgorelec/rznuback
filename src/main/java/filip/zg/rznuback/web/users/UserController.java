@@ -5,6 +5,8 @@ import filip.zg.rznuback.domain.User;
 import filip.zg.rznuback.service.ChatService;
 import filip.zg.rznuback.service.RecipeService;
 import filip.zg.rznuback.service.UserService;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -66,17 +68,25 @@ public class UserController {
 
 
     @GetMapping("/get-message")
-    public String getMessage(@RequestBody String chatType) throws InterruptedException {
+    public Message getMessage() throws InterruptedException {
         if (userService.getChatType().equals("Polling"))
-            return ChatService.getMessage();
-        else if(userService.getChatType().equals("Long Polling")) {
+            return new Message(ChatService.getMessage());
+        else if(userService.getChatType().equals("Long polling")) {
             String msg = ChatService.getMessage();
             while (msg == null) {
                 Thread.sleep(200);
                 msg = ChatService.getMessage();
             }
-            return msg;
+            return new Message(msg);
         }
-        return "";
+        return new Message("");
     }
+
+}
+
+@Data
+@AllArgsConstructor
+class Message{
+    private String text;
+
 }

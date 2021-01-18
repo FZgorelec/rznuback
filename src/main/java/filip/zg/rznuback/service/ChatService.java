@@ -22,12 +22,12 @@ public class ChatService {
 
     public static String getMessage() {
         if (isAdmin()) {
-            String msg = adminMessage;
-            adminMessage = null;
-            return msg;
-        } else {
             String msg = userMessage;
             userMessage = null;
+            return msg;
+        } else {
+            String msg = adminMessage;
+            adminMessage = null;
             return msg;
         }
     }
